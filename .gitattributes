@@ -1,0 +1,16 @@
+# Git attributes for Fairlead
+# Mark precompiled runtime JARs as vendored and binary so Linguist ignores them
+lib/* binary linguist-vendored
+*.jar binary linguist-vendored
+
+# Ensure consistent line endings
+* text=auto eol=lf
+*.gs text eol=lf
+*.gsx text eol=lf
+*.gst text eol=lf
+*.gsp text eol=lf
+*.java text eol=lf
+*.c text eol=lf
+*.h text eol=lf
+*.py text eol=lf
+*.md text eol=lf

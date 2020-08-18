@@ -1,0 +1,30 @@
+# Build and compiler output
+build/
+bin/classes/
+*.class
+*.o
+*.so
+*.dylib
+*.a
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# IDE and OS artifacts
+.DS_Store
+.idea/
+*.iml
+.vscode/
+
+# Test output and temporary runtime files
+logs/
+run/
+*.log
+*.tmp
