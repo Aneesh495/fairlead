@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'org.fairlead'
+version = '0.1.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(dir: 'lib', include: ['*.jar'])
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources', 'src/main/gosu']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+        resources {
+            srcDirs = ['src/test/resources', 'src/test/gosu']
+        }
+    }
+}
+
+task runGosu(type: JavaExec) {
+    dependsOn compileJava
+    description = 'Executes Fairlead Gosu main entry point'
+    classpath = files(
+        sourceSets.main.java.classesDirectory,
+        fileTree(dir: 'lib', include: ['*.jar'])
+    )
+    mainClass = 'gw.lang.Gosu'
+    args = [
+        '-classpath', 'src/main/gosu:' + sourceSets.main.java.classesDirectory.get().asFile.absolutePath,
+        'src/main/gosu/fairlead/Main.gs'
+    ]
+}
+
+application {
+    mainClass = 'fairlead.server.FairleadServer'
+}
