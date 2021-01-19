@@ -78,7 +78,7 @@ test-native: native
 
 test-gosu: compile-java
 	@echo "==> Executing Gosu unit, invariant, and regression test suites..."
-	@$(JAVA) -cp "$(CLASSPATH)" gw.lang.Gosu -classpath "$(SRC_GOSU_DIR):$(TEST_GOSU_DIR):$(BUILD_CLASSES_JAVA)" $(TEST_GOSU_DIR)/fairlead/test/TestRunner.gs
+	@$(JAVA) -cp "$(CLASSPATH)" gw.lang.Gosu -classpath "$(SRC_GOSU_DIR):$(TEST_GOSU_DIR):$(BUILD_CLASSES_JAVA)" -e "fairlead.test.TestRunner.main(new String[0])"
 
 test: test-gosu test-native
 	@echo "==> Executing Python client test suite..."
