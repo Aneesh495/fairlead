@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export PYTHONPATH="$ROOT_DIR/python:$PYTHONPATH"
+exec python3 -m fairlead.tui

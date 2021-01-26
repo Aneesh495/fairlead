@@ -6,6 +6,8 @@ bin/classes/
 *.so
 *.dylib
 *.a
+c_src/test_simd
+c_src/libfairlead_simd.a
 
 # Python artifacts
 __pycache__/

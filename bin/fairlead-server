@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+LIB_DIR="$ROOT_DIR/lib"
+SRC_GOSU="$ROOT_DIR/src/main/gosu"
+CLASSES="$ROOT_DIR/build/classes/java"
+
+PORT="${1:-8080}"
+echo "==> Launching Fairlead Server daemon on port $PORT..."
+exec java -cp "$CLASSES:$LIB_DIR/*" gw.lang.Gosu -classpath "$SRC_GOSU:$CLASSES" -e "fairlead.server.FairleadServer.main(new String[]{\"$PORT\"})"
