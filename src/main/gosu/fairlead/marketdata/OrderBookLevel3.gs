@@ -134,6 +134,22 @@ class OrderBookLevel3 {
     return _orders.size()
   }
 
+  public property get BestBidPrice() : long {
+    return _level2Book.BestBidPrice
+  }
+
+  public property get BestBidSize() : long {
+    return _level2Book.BestBidSize
+  }
+
+  public property get BestAskPrice() : long {
+    return _level2Book.BestAskPrice
+  }
+
+  public property get BestAskSize() : long {
+    return _level2Book.BestAskSize
+  }
+
   public function getOrder(orderId : String) : RestingOrder {
     return _orders.get(orderId)
   }

@@ -96,6 +96,10 @@ class Order {
     return _parentOrderId != null
   }
 
+  public property get LimitPriceDouble() : double {
+    return (_limitPrice as double) / (PriceLevel.PRICE_SCALE as double)
+  }
+
   public property get TotalNotionalValue() : double {
     var px = (_limitPrice as double) / (PriceLevel.PRICE_SCALE as double)
     return px * (_quantity as double)

@@ -28,6 +28,10 @@ class FillAllocation {
     _isCompleted = false
   }
 
+  construct(venue : VenueId, qty : long, targetPx : long, priority : int, tag : String) {
+    this(venue, qty, targetPx, 0.0, tag, priority, 100L)
+  }
+
   public function recordFill(qty : long) {
     _filledQuantity += qty
     if (_filledQuantity >= _slicedQuantity) {

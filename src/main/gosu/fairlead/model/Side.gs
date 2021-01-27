@@ -5,14 +5,20 @@ package fairlead.model
  */
 enum Side {
   BUY,
-  SELL
+  SELL,
+  SELL_SHORT,
+  SELL_SHORT_EXEMPT
 
   public property get IsBuy() : boolean {
     return this == BUY
   }
 
   public property get IsSell() : boolean {
-    return this == SELL
+    return this == SELL || this == SELL_SHORT || this == SELL_SHORT_EXEMPT
+  }
+
+  public property get IsShort() : boolean {
+    return this == SELL_SHORT || this == SELL_SHORT_EXEMPT
   }
 
   public function opposite() : Side {
@@ -24,7 +30,13 @@ enum Side {
   }
 
   public function toFixString() : String {
-    return this == BUY ? "1" : "2"
+    switch (this) {
+      case BUY: return "1"
+      case SELL: return "2"
+      case SELL_SHORT: return "5"
+      case SELL_SHORT_EXEMPT: return "6"
+      default: return "1"
+    }
   }
 
   public static function fromFixString(val : String) : Side {
@@ -34,6 +46,12 @@ enum Side {
     }
     if (val == "2" || val.equalsIgnoreCase("SELL") || val.equalsIgnoreCase("S")) {
       return SELL
+    }
+    if (val == "5" || val.equalsIgnoreCase("SELL_SHORT") || val.equalsIgnoreCase("SS")) {
+      return SELL_SHORT
+    }
+    if (val == "6" || val.equalsIgnoreCase("SELL_SHORT_EXEMPT") || val.equalsIgnoreCase("SSX")) {
+      return SELL_SHORT_EXEMPT
     }
     throw new java.lang.IllegalArgumentException("Unknown FIX Side: " + val)
   }

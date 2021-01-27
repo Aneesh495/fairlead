@@ -31,6 +31,10 @@ class NBBO {
     _sequenceNumber = seq
   }
 
+  construct(symbol : String, bidPx : long, bidSz : long, askPx : long, askSz : long, timeNs : long, seq : long) {
+    this(symbol, bidPx, bidSz, null, askPx, askSz, null, timeNs, seq)
+  }
+
   public property get Spread() : long {
     return _bestAskPrice - _bestBidPrice
   }
