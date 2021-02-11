@@ -92,6 +92,16 @@ class TestRunner {
       totalSuites++
     }
 
+    try {
+      ExtendedModulesUnitTest.runAll()
+      passed++
+      totalSuites++
+    } catch (e : java.lang.Throwable) {
+      print("  [FAIL] ExtendedModulesUnitTest failed: " + e.getMessage())
+      e.printStackTrace()
+      totalSuites++
+    }
+
     var elapsedMs = ((java.lang.System.nanoTime() - startNs) as double) / 1000000.0
     print("--------------------------------------------------------------------------------")
     print(" VERIFICATION SUMMARY: " + passed + "/" + totalSuites + " test suites PASSED in " +
