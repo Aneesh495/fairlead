@@ -25,7 +25,7 @@ C_SRC_DIR := $(ROOT_DIR)/c_src
 CLASSPATH := $(BUILD_CLASSES_JAVA):$(LIBS_CP)
 GOSU_CP := $(SRC_GOSU_DIR):$(TEST_GOSU_DIR):$(CLASSPATH)
 
-.PHONY: all clean compile-java compile-test-java test test-gosu native test-native bench server cli tui verify help
+.PHONY: all clean compile-java compile-test-java test test-gosu test-native test-python native bench server cli tui verify help
 
 all: compile-java native test
 
@@ -80,11 +80,13 @@ test-gosu: compile-java
 	@echo "==> Executing Gosu unit, invariant, and regression test suites..."
 	@$(JAVA) -cp "$(CLASSPATH)" gw.lang.Gosu -classpath "$(SRC_GOSU_DIR):$(TEST_GOSU_DIR):$(BUILD_CLASSES_JAVA)" -e "fairlead.test.TestRunner.main(new String[0])"
 
-test: test-gosu test-native
+test-python:
 	@echo "==> Executing Python client test suite..."
 	@if [ -d "$(ROOT_DIR)/python/tests" ]; then \
 		PYTHONPATH=$(ROOT_DIR)/python $(PYTHON) -m unittest discover -s $(ROOT_DIR)/python/tests -p "test_*.py"; \
 	fi
+
+test: test-gosu test-native test-python
 	@echo "==> All test suites passed successfully."
 
 bench: compile-java native
